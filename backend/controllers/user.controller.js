@@ -1,18 +1,23 @@
+import User from "../models/User.model.js";
+
 export const getProfile = async (req, res) => {
     res.json(req.user);
 };
 
 export const updateProfile = async (req, res) => {
     try {
-        const user = req.user;
+        const user = await User.findById(req.user._id);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
 
         user.name = req.body.name || user.name;
-        await user.save();
+        user.email = req.body.email || user.email;
 
-        res.json({
-            message: "Profile updated successfully",
-            user,
-        });
+        const updatedUser = await user.save();
+
+        res.json(updatedUser);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import API from "../services/api";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -9,12 +10,22 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
+        if (!email || !password) {
+            toast.error("Please enter email and password");
+            return;
+        }
+
         try {
             const res = await API.post("/auth/login", { email, password });
+
             localStorage.setItem("token", res.data.token);
+
+            toast.success("Login successful!");
+
             navigate("/dashboard");
         } catch (err) {
-            alert(err.response?.data?.message || "Login failed");
+            toast.error(err.response?.data?.message || "Login failed");
         }
     };
 
@@ -58,7 +69,7 @@ const Login = () => {
 
                 <div className="mt-6 border-t pt-4 text-center">
                     <p className="text-sm text-gray-600">
-                        Don’t have an account?{" "}
+                        Don't have an account?{" "}
                         <Link
                             to="/register"
                             className="text-purple-600 font-semibold hover:underline"
@@ -67,7 +78,6 @@ const Login = () => {
                         </Link>
                     </p>
                 </div>
-
             </div>
         </div>
     );

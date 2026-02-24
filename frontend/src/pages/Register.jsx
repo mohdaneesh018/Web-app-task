@@ -1,6 +1,7 @@
 import { useState } from "react";
 import API from "../services/api";
 import { useNavigate, Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -10,6 +11,17 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    if (!name || !email || !password) {
+      toast.error("All fields are required");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
     try {
       const res = await API.post("/auth/register", {
         name,
@@ -18,9 +30,12 @@ const Register = () => {
       });
 
       localStorage.setItem("token", res.data.token);
+
+      toast.success("Registration successful!");
+
       navigate("/dashboard");
     } catch (err) {
-      alert(err.response?.data?.message || "Registration failed");
+      toast.error(err.response?.data?.message || "Registration failed");
     }
   };
 
@@ -71,7 +86,6 @@ const Register = () => {
 
         </form>
 
-        {/* Bottom Line */}
         <div className="mt-6 border-t pt-4 text-center">
           <p className="text-sm text-gray-600">
             Already have an account?{" "}

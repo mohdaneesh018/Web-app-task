@@ -83,23 +83,33 @@ npm run dev
 
 ---
 
-🔄 API Endpoints:-
+## 🔄 API Endpoints :-
 
-🔐 Auth Routes
-Method	Endpoint	        Description
-POST	/api/auth/register	Register user
-POST	/api/auth/login	    Login user
+### 🔐 Auth Routes
 
-👤 User
-Method	Endpoint	        Description
-GET	    /api/user/profile	Get user profile
+| Method | Endpoint              | Description     |
+|--------|----------------------|-----------------|
+| POST   | /api/auth/register   | Register user   |
+| POST   | /api/auth/login      | Login user      |
 
-📝 Tasks
-Method	Endpoint	        Description
-GET	    /api/tasks	        Get all tasks
-POST	/api/tasks/create	Create task
-PUT	    /api/tasks/:id	    Update task
-DELETE	/api/tasks/:id	    Delete task
+---
+
+### 👤 User Routes
+
+| Method | Endpoint              | Description        |
+|--------|----------------------|--------------------|
+| GET    | /api/user/profile    | Get user profile   |
+
+---
+
+### 📝 Task Routes
+
+| Method | Endpoint              | Description        |
+|--------|----------------------|--------------------|
+| GET    | /api/tasks           | Get all tasks      |
+| POST   | /api/tasks/create    | Create new task    |
+| PUT    | /api/tasks/:id       | Update task        |
+| DELETE | /api/tasks/:id       | Delete task        |
 
 ---
 

@@ -127,16 +127,19 @@ All backend API routes have been thoroughly tested using Postman.
 
 ---
 
-## 🌍 Production Scalability Notes
+## 🚀 Scaling Strategy for Production
 
-To scale this application for production:
+If this application were deployed to production, I would scale it as follows:
 
-- Use HTTPS
-- Store JWT in localStorage (for simplicity)
-- Implement rate limiting
-- Add pagination for tasks
+- Use HTTPS with SSL certificates
+- Store JWT in HttpOnly cookies instead of localStorage
+- Implement rate limiting to prevent abuse
+- Add pagination and indexing in MongoDB for better performance
+- Deploy backend using scalable platforms like Render/AWS
 - Use MongoDB Atlas production cluster
-- Use environment-specific configurations
+- Implement logging and monitoring (e.g., Winston, Morgan)
+- Enable environment-based configuration
+- Add caching (e.g., Redis) for frequently accessed data
 
 ---
 
